@@ -26,7 +26,7 @@ get_header(); ?>
                         <?php endif; ?>
                         
                         <div class="post-content-wrapper">
-                            <header class="entry-header">
+                            <div class="entry-header">
                                 <!-- Categories Pills -->
                                 <?php if (has_category()) : ?>
                                     <div class="post-categories">
@@ -82,7 +82,7 @@ get_header(); ?>
                                         </span>
                                     </div>
                                 </div>
-                            </header>
+                            </div>
                             
                             <div class="entry-content">
                                 <?php 

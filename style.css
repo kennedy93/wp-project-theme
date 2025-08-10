@@ -199,6 +199,9 @@ nav ul li a {
     color: var(--dark);
     border-radius: 4px;
     transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 nav ul li a:hover {
@@ -228,21 +231,18 @@ nav ul li a:hover {
 nav ul li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
 /* Level 2+ dropdown positioning - appears to the right */
 .sub-menu li:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
 }
 
 .sub-menu .sub-menu {
-    top: 0;
+    top: -19px;
     left: 100%;
-    transform: translateX(10px);
-    margin-left: 5px;
+    margin-left: 2px;
 }
 
 .sub-menu .sub-menu .sub-menu {
@@ -300,29 +300,6 @@ nav > ul > li:has(.sub-menu) > a::after {
     opacity: 0.7;
 }
 
-/* Hover effects for arrows */
-nav > ul > li:hover > a::after {
-    opacity: 1;
-    transform: rotate(180deg);
-}
-
-.sub-menu li:hover > a::after {
-    opacity: 1;
-}
-
-/* Level indicators with different styling */
-.sub-menu .sub-menu {
-    border-left: 3px solid var(--accent);
-}
-
-.sub-menu .sub-menu .sub-menu {
-    border-left: 3px solid var(--secondary);
-}
-
-.sub-menu .sub-menu .sub-menu .sub-menu {
-    border-left: 3px solid var(--primary);
-}
-
 /* Different background shades for each level */
 .sub-menu {
     background: var(--white);
@@ -342,9 +319,8 @@ nav > ul > li:hover > a::after {
 
 /* Enhanced hover effects for multi-level */
 .sub-menu li a:hover {
-    background: var(--light);
-    color: var(--primary);
-    padding-left: 25px;
+    /* background: var(--light);
+    color: var(--primary); */
 }
 
 /* Smooth transitions for all submenu levels */
@@ -357,23 +333,8 @@ nav > ul > li:hover > a::after {
 
 /* Focus styles for accessibility */
 .sub-menu li a:focus {
-    outline: 2px solid var(--accent);
     outline-offset: 2px;
     background: var(--light);
-}
-
-/* Delay for better UX - prevents accidental closures */
-nav ul li:hover > .sub-menu,
-.sub-menu li:hover > .sub-menu {
-    transition-delay: 0.1s;
-}
-
-/* Keep submenu open when navigating through items */
-nav ul li:hover > .sub-menu,
-.sub-menu li:hover > .sub-menu,
-.sub-menu:hover {
-    opacity: 1;
-    visibility: visible;
 }
 
 .mobile-toggle {
@@ -765,9 +726,6 @@ nav ul li:hover > .sub-menu,
 
 .project-body {
     padding: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
 }
 
 .project-image-large {
@@ -786,6 +744,13 @@ nav ul li:hover > .sub-menu,
     margin-bottom: 25px;
     position: relative;
     padding-bottom: 15px;
+}
+
+.project-details img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .project-details h3:after {
@@ -1802,21 +1767,27 @@ nav ul li:hover > .sub-menu,
         background: var(--white);
         box-shadow: var(--shadow-hover);
         padding: 20px;
-        opacity: 0;
-        visibility: hidden;
+        display: none;
         transform: translateY(10px);
         transition: var(--transition);
     }
     
     nav.active {
-        opacity: 1;
-        visibility: visible;
+        display: block;
         transform: translateY(0);
     }
     
     nav ul {
         flex-direction: column;
         gap: 5px;
+    }
+
+    nav > ul > li.menu-item-has-children > a::after, nav > ul > li:has(.sub-menu) > a::after {
+        content: '';
+    }
+
+    .sub-menu li.menu-item-has-children > a::after, .sub-menu li:has(.sub-menu) > a::after{
+        content: '';
     }
     
     .sub-menu {
@@ -1833,30 +1804,19 @@ nav ul li:hover > .sub-menu,
     
     /* Mobile: Stack all levels vertically with indentation */
     .sub-menu {
-        margin-left: 20px;
+        margin-left: 30px;
+    }
+    .sub-menu li:before{
+        content: "-";
+        position: absolute;
+        top: 8px;
+        z-index: 9;
     }
     
     .sub-menu .sub-menu {
-        margin-left: 40px;
         background: transparent;
-        border-left: 2px solid var(--accent);
-        padding-left: 15px;
-    }
-    
-    .sub-menu .sub-menu .sub-menu {
-        margin-left: 60px;
-        border-left: 2px solid var(--secondary);
-    }
-    
-    .sub-menu .sub-menu .sub-menu .sub-menu {
-        margin-left: 80px;
-        border-left: 2px solid var(--primary);
-    }
-    
-    /* Hide arrows on mobile */
-    .sub-menu li.menu-item-has-children > a::after,
-    .sub-menu li:has(.sub-menu) > a::after {
-        display: none;
+        border-left: 0px;
+        margin-left: 20px;
     }
     
     /* Mobile submenu links */
@@ -1884,6 +1844,17 @@ nav ul li:hover > .sub-menu,
     .content-primary{
         margin-bottom: 60px;
     }
+
+    .project-url {
+        display: block;
+        text-align: center;
+    }
+
+    .back-to-projects{
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    }  
 }
 
 @media (max-width: 576px) {
